@@ -19,18 +19,17 @@
 lang:                  en
 
 # The title of your blog. Used in the sidebar and the browser tab.
-title:                 Hydejack Starter Kit
+title:                 Prateek Arora
 
 # A short description (~150 chars) of the page used for the meta description tag.
 # Can use markdown, but no more than one paragraph (enforced by `>`)
 description:           >
-  A Jekyll theme with JavaScript powers. "Best Theme by a Mile".
-  Combines the best of static sites and modern web apps.
-  Open `_config.yml` to edit this text.
-
+  I'm a Masters Student in Robotics Engineering at the University of Maryland, College Park(UMD). Welcome to my website
 # A shorter description for the sidebar.
 tagline:               >
-  Open `_config.yml` to edit this text.
+  <strong>Robotics Graduate Student <br />
+  Research Assistant (AUG 2018-Present) <br />
+  [Perception and Robotics Group](http://prg.cs.umd.edu/)</strong>
 
 # A list of keywords for your blog.
 keywords:              []
@@ -41,15 +40,20 @@ logo:                  /assets/icons/icon.png
 # This should be the same author as first entry in `_data/authors.yml`.
 author:
   # Used by `jekyll-feed`:
-  name:                <firstname> <lastname>
-  email:               <mail@domain.tld>
+  name:                Prateek Arora
+  email:               prateekarorav2@gmail.com
+  picture:             /assets/img/me.jpg
+  social:
+    GitHub:              pratiquea
+    youtube:             https://www.youtube.com/channel/UCJRf-9dpLRMxIzdJCrOGqWQ/videos
+    facebook:            pratiquea
+
   # Used by `jekyll-seo-tag`:
   # twitter:             <username>
 
 # This text will appear in a `<small>` tag in the footer of every page.
 copyright:             >
   © 2018. All rights reserved.
-  Open `_config.yml` to edit this text.
 
 # Add links to the footer.
 # Typically you'll want to link to your impress, cookies or privacy policy, etc.
@@ -64,20 +68,42 @@ permalink:             /:categories/:year-:month-:day-:title/
 
 # Pagination configuration (used by the `blog` layout)
 paginate:              5
-paginate_path:         /page-:num/
+paginate_path:         /test_blog/page-:num/
+# paginate_path:         index.html
 
 
+
+
+# =============================================================================
+# ====== Website content 
+# =============================================================================
+
+menu:
+  - title: Example
+    url:   /example/
+  - title: Projects
+    url:   /projects/
+  - title: Resume
+    url:   /resume/
+  - title: About
+    url:   /about/
+# =============================================================================
 # Customizaton
 # ========================================================================================
 
 # Sidebar image and theme color of the site.
-accent_image:          /assets/img/sidebar-bg.jpg
+# accent_image:          /assets/img/flower.jpg
+accent_image:          /assets/img/scene.jpg
+#/assets/img/sidebar-bg.jpg
 accent_color:          rgb(79,177,186)
+
 
 # This is used for the `theme-color` meta tag,
 # which changes the background color of the browser UI in certain browsers.
 # Defaults to `accent_color`.
 theme_color:           rgb(25,55,71)
+# theme_color:           rgb(25,255,71)
+
 
 # The string encoding which fonts to fetch from Google Fonts.
 # See: <https://hydejack.com/docs/configuration/>
@@ -116,7 +142,7 @@ defaults:
 
 # Set your Google Analytics id to receive `pageview` events.
 # To remove Google Anaylics from your page, remove the line below.
-# google_analytics:      UA-XXXXXXXX-X
+google_analytics:      UA-XXXXXXXX-X
 
 # Setting a disqus shortname will enable the comment section on
 # pages with `comments: true` in the front matter.
@@ -132,6 +158,13 @@ defaults:
 # These settings are specific to Hydejack.
 
 hydejack:
+  # Enable dark mode (only available in pro mode)
+  dark_mode:
+    dynamic: true
+    sunrise: 6
+    sunset:  18
+    icon:    true
+    always:  false
   # Configure the order of complementary content on blog posts
   post_addons:         [about, newsletter, related]
 

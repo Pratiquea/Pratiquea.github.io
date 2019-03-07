@@ -4,6 +4,6 @@
 # To create links to social media sites, check out `_data/authors.yml`!
 redirect_to: https://hydejack.com/docs/
 title: Documentation
-menu: true
-order: 2
+<!-- menu: true
+order: 2 -->
 ---

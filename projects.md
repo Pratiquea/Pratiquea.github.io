@@ -11,5 +11,5 @@ description: >
   Projects that I have undertaken over the years...
 
 menu: true
-order: 2
+<!-- order: 2 -->
 ---

@@ -27,8 +27,8 @@ description:           >
   I'm a Masters Student in Robotics Engineering at the University of Maryland, College Park(UMD). Welcome to my website
 # A shorter description for the sidebar.
 tagline:               >
-  <strong>Robotics Graduate Student <br />
-  Research Assistant (AUG 2018-Present) <br />
+  <strong>Robotics Graduate Student <br /><br />
+  Research Associate (AUG 2018-Present) <br />
   [Perception and Robotics Group](http://prg.cs.umd.edu/)</strong>
 
 # A list of keywords for your blog.
@@ -74,6 +74,8 @@ paginate_path:         /test_blog/page-:num/
 
 
 
+  # - title: About
+  #   url:   /about/
 
 # =============================================================================
 # ====== Website content 
@@ -82,9 +84,7 @@ paginate_path:         /test_blog/page-:num/
 menu:
   - title: Example
     url:   /example/
-  - title: About
-    url:   /about/
-  - title: About_m2
+  - title: About_me
     url:   /about_me.md
   - title: Projects
     url:   /projects/

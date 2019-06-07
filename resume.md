@@ -1,6 +1,6 @@
 ---
 # Featured tags need to have the `blog` layout
-layout: blog
+layout: page
 
 title: Resume
 
@@ -11,7 +11,22 @@ description: >
   my resume
 
 hide_description: true
+permalink: /assets/
 
 menu: true
 <!-- order: 2 -->
 ---
+<iframe src="/assets/Resume.pdf"  width="100%" height="1000 "></iframe>
+
+
+<!-- <iframe src="/assets/Resume.pdf"  width="100%" height="100% "></iframe> -->
+
+<!-- ---
+title: "Creation of a Landscape: The Logic or Urbanization in the PRC"
+description: NYU East Asian Studies Department, MA Thesis Defense
+date: 2013-11-01
+layout: pdf
+categories: writing
+permalink: /writing/creation-of-a-landscape/
+---
+ -->

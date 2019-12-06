@@ -8927,7 +8927,7 @@ textarea.form-control {
     right: 0;
     bottom: 0;
     content: '';
-    opacity: .3;
+    opacity: 0.05;
     background: rgba(0, 0, 0, 0);
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 17%, rgba(0, 0, 0, 0) 27%, black 100%);
     background: -webkit-gradient(left top, left bottom, color-stop(17%, rgba(0, 0, 0, 0)), color-stop(27%, rgba(0, 0, 0, 0)), color-stop(100%, black));

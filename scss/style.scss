@@ -31,17 +31,16 @@ $primary: #0980a6;
     transition:         all $transition ease;
 }
 
-// @mixin gradient-background(){
-// 	background: rgba(159,246,105,1);
-// 	background: -moz-linear-gradient(-45deg, rgba(159,246,105,1) 0%, rgba(49,222,121,1) 100%);
-// 	background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(159,246,105,1)), color-stop(100%, rgba(49,222,121,1)));
-// 	background: -webkit-linear-gradient(-45deg, rgba(159,246,105,1) 0%, rgba(49,222,121,1) 100%);
-// 	background: -o-linear-gradient(-45deg, rgba(159,246,105,1) 0%, rgba(49,222,121,1) 100%);
-// 	background: -ms-linear-gradient(-45deg, rgba(159,246,105,1) 0%, rgba(49,222,121,1) 100%);
-// 	background: linear-gradient(135deg, rgba(159,246,105,1) 0%, rgba(49,222,121,1) 100%);
-// 	// filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6dd5ed', endColorstr='#2193b0', GradientType=1 );
-// 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ff669', endColorstr='#31de79', GradientType=1 );
-// }
+@mixin gradient-background-light(){
+	background: rgb(46, 190, 238);
+	background: -moz-linear-gradient(-45deg, rgb(46, 190, 238) 0%, rgb(3, 77, 195) 100%);
+	background: -webkit-gradient(left top, right bottom, color-stop(0%, rgb(46, 190, 238)), color-stop(100%, rgb(3, 77, 195)));
+	background: -webkit-linear-gradient(-45deg, rgb(46, 190, 238) 0%, rgb(3, 77, 195) 100%);
+	background: -o-linear-gradient(-45deg, rgb(46, 190, 238) 0%, rgb(3, 77, 195) 100%);
+	background: -ms-linear-gradient(-45deg, rgb(46, 190, 238) 0%, rgb(3, 77, 195) 100%);
+	background: linear-gradient(135deg, rgb(46, 190, 238) 0%, rgb(3, 77, 195) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6dd5ed', endColorstr='#2193b0', GradientType=1 );
+}
 // light:rgba(109, 213, 237,1)
 // dark = rgba(33, 147, 176,1)
 @mixin gradient-background(){
@@ -53,6 +52,10 @@ $primary: #0980a6;
 	background: -ms-linear-gradient(-45deg, rgba(9, 128, 166,1) 0%, rgba(1, 53, 135,1) 100%);
 	background: linear-gradient(135deg, rgba(9, 128, 166,1) 0%, rgba(1, 53, 135,1) 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6dd5ed', endColorstr='#2193b0', GradientType=1 );
+}
+
+@mixin red-background(){
+	background: red;
 }
 
 html {
@@ -500,6 +503,7 @@ h1, h2, h3, h4, h5,
 						right: 0;
 						width: 1200px;
 						margin: 0 auto;
+						// text-shadow: 0px 0px 6px red;
 					}
 					@include media-breakpoint-down(md){
 						width: 100%;
@@ -510,16 +514,55 @@ h1, h2, h3, h4, h5,
 						bottom: 0;
 						z-index: 1;
 						padding: 1em;
+						// text-shadow: 0px 0px 6px red;
 					}
 					.text{
+						@include media-breakpoint-down(xs){
+							position: absolute;
+							font-size: 20px;
+							top: 50%;
+							left: 0;
+							transform: translateY(-50%);
+							right: 0;
+							max-width: 100%;
+							padding-left: 45px;
+							padding-right: 3em;
+							color: $white;
+						}
+						@include media-breakpoint-only(sm){
+							position: absolute;
+							font-size: 36px;
+							top: 50%;
+							left: 0;
+							transform: translateY(-50%);
+							right: 0;
+							max-width: 100%;
+							padding-left: 45px;
+							padding-right: 3em;
+							color: $white;
+						}
+						@include media-breakpoint-only(md){
+							position: absolute;
+							font-size: 36px;
+							top: 50%;
+							left: 0;
+							transform: translateY(-50%);
+							right: 0;
+							max-width: 100%;
+							padding-left: 45px;
+							padding-right: 3em;
+							color: $white;
+						}
 						@include media-breakpoint-up(lg){
 							position: absolute;
+							font-size: 36px;
+							color: black;
 							top: 50%;
 							left: 0;
 							transform: translateY(-50%);
 							right: 0;
 							// width: 1200px;
-							max-width: 50%;
+							max-width: 60%;
 							padding-left: 45px;
 							padding-right: 3em;
 						}
@@ -538,16 +581,30 @@ h1, h2, h3, h4, h5,
 				  -webkit-text-fill-color: transparent;
 				}
 				.subheading_mod_h1{
-					color: $black;
 					font-weight: 600;
 					font-size: 50px;
 					letter-spacing: 3px;
-					// text-transform: uppercase;
-					color: rgba(0,0,0,.3);
 					color: $primary;
-					@include gradient-background();
-					-webkit-background-clip: text;
-				  -webkit-text-fill-color: transparent;
+					@include media-breakpoint-down(xs){
+						@include gradient-background-light();
+						-webkit-background-clip: text;
+						-webkit-text-fill-color: transparent;
+					}
+					@include media-breakpoint-only(sm){
+						@include gradient-background-light();
+						-webkit-background-clip: text;
+						-webkit-text-fill-color: transparent;
+					}
+					@include media-breakpoint-only(md){
+						@include gradient-background-light();
+						-webkit-background-clip: text;
+						-webkit-text-fill-color: transparent;
+					}
+					@include media-breakpoint-up(lg){
+						@include gradient-background();
+						-webkit-background-clip: text;
+						-webkit-text-fill-color: transparent;
+					}
 				}
 				.text{
 					position: relative;

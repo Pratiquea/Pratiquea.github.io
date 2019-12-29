@@ -406,6 +406,8 @@ h1, h2, h3, h4, h5,
 	position: relative;
 	.owl-item {
 		opacity: .4;
+		-ms-touch-action: auto;
+        touch-action: auto;
 		&.active {
 			opacity: 1;
 		}
@@ -990,6 +992,8 @@ h1, h2, h3, h4, h5,
 		margin: 0;
 	}
 	.owl-carousel .owl-stage-outer{
+		-ms-touch-action: auto;
+        touch-action: auto;
 		padding-top: 0;
 		padding-bottom: 0;
 		position: relative;
@@ -1598,6 +1602,8 @@ textarea.form-control {
 		margin: 0;
 	}
 	.owl-carousel .owl-stage-outer{
+		-ms-touch-action: auto;
+		touch-action: auto;
 		padding-top: 0;
 		padding-bottom: 0;
 		position: relative;
@@ -1841,7 +1847,19 @@ textarea.form-control {
 	position: relative;
 	display: block;
 	width: 100%;
-	height: 350px;
+	height: 400px;
+	@include media-breakpoint-down(xs){
+		height: 580px;
+	}
+	@include media-breakpoint-only(sm){
+		height: 580px;
+	}
+	@include media-breakpoint-only(md){
+		height: 400px;
+	}
+	@include media-breakpoint-up(lg){
+		height: 400px;
+	}
 	&:after{
 		position: absolute;
 		top: 0;

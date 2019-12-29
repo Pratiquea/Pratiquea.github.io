@@ -406,8 +406,6 @@ h1, h2, h3, h4, h5,
 	position: relative;
 	.owl-item {
 		opacity: .4;
-		-ms-touch-action: auto;
-        touch-action: auto;
 		&.active {
 			opacity: 1;
 		}
@@ -992,8 +990,6 @@ h1, h2, h3, h4, h5,
 		margin: 0;
 	}
 	.owl-carousel .owl-stage-outer{
-		-ms-touch-action: auto;
-        touch-action: auto;
 		padding-top: 0;
 		padding-bottom: 0;
 		position: relative;
@@ -1602,8 +1598,6 @@ textarea.form-control {
 		margin: 0;
 	}
 	.owl-carousel .owl-stage-outer{
-		-ms-touch-action: auto;
-		touch-action: auto;
 		padding-top: 0;
 		padding-bottom: 0;
 		position: relative;

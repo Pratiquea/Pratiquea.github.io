@@ -7754,9 +7754,7 @@ h1, h2, h3, h4, h5,
 .owl-carousel {
   position: relative; }
   .owl-carousel .owl-item {
-    opacity: .4;
-    -ms-touch-action: auto;
-    touch-action: auto; }
+    opacity: .4; }
     .owl-carousel .owl-item.active {
       opacity: 1; }
   .owl-carousel .owl-dots {
@@ -8299,8 +8297,6 @@ h1, h2, h3, h4, h5,
 .ftco-project .owl-carousel {
   margin: 0; }
 .ftco-project .owl-carousel .owl-stage-outer {
-  -ms-touch-action: auto;
-  touch-action: auto;
   padding-top: 0;
   padding-bottom: 0;
   position: relative; }
@@ -8789,8 +8785,6 @@ textarea.form-control {
   .testimony-section .owl-carousel {
     margin: 0; }
   .testimony-section .owl-carousel .owl-stage-outer {
-    -ms-touch-action: auto;
-    touch-action: auto;
     padding-top: 0;
     padding-bottom: 0;
     position: relative; }

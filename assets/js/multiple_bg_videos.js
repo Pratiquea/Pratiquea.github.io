@@ -1,10 +1,27 @@
 var videoSource = new Array();
-videoSource[0]='./assets/videos/wall.mp4';
-videoSource[1]='./assets/videos/window.mp4';
-var videoCount = videoSource.length;
-// console.info("vid source 0 = ",videoSource[0])
-// console.info("vid source 1 = ",videoSource[1])
+function vidSourceSelect(x){
+    if(x.matches)
+    {
+        videoSource[0]='./assets/videos/wall_mobile.mp4';
+        videoSource[1]='./assets/videos/window_mobile.mp4';
+    }
+    else
+    {
+        videoSource[0]='./assets/videos/wall.mp4';
+        videoSource[1]='./assets/videos/window.mp4';
+    }
+}
 
+var x = window.matchMedia("(max-width: 700px)")
+vidSourceSelect(x)
+// videoSource[0]='./assets/videos/wall.mp4';
+// videoSource[1]='./assets/videos/window.mp4';
+var videoCount = videoSource.length;
+console.info("vid count = ",videoCount)
+console.info("vid source 0 = ",videoSource[0])
+console.info("vid source 1 = ",videoSource[1])
+
+x.addListener(vidSourceSelect)
 document.getElementById("bgvid").setAttribute("src",videoSource[0]);
 // Create a function to load and play the videos.
  

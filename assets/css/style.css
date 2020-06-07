@@ -26,7 +26,7 @@
   --card-body-color: rgba(107, 107, 107, 0.2);
   --home-bg-tint-color: rgba(12, 1, 37, 0.425);
   --card-link-color:rgba(40, 155, 218, 0.85);
-  --card-link-hover-color:rgba(8, 18, 32, 0.90);
+  --card-link-hover-color:rgba(40, 155, 218, 1);
   --card-body-hover-tint: rgba(255, 255, 255, 0.6);
 
   --fg-color: #149ddd;

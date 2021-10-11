@@ -1374,10 +1374,12 @@ section {
 
 #footer .copyright {
   text-align: center;
+  opacity: 0.2;
 }
 
 #footer .credits {
   padding-top: 5px;
+  opacity: 0.2;
   text-align: center;
   font-size: 13px;
   color: #eaebf0;

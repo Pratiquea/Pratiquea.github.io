@@ -10,7 +10,7 @@
 --------------------------------------------------------------*/
 
 :root{
-  --flex-bg-tint-color: #212431;
+  --flex-bg-tint-color: #212431;/*212431;*/
   --flex-bg-color: #040b14;
   --bg-color-primary:#fff;
   --bg-color-secondary:#f5f8fd;
@@ -24,7 +24,7 @@
   --icon-active-color: #37b3ed;
   --highlight-color: #149ddd; /*same as fg-color for light theme*/
   --card-body-color: rgba(107, 107, 107, 0.2);
-  --home-bg-tint-color: rgba(12, 1, 37, 0.425);
+  --home-bg-tint-color: rgba(12, 1, 37, 0.336);/*rgba(12, 1, 37, 0.425);*/
   --card-link-color:rgba(40, 155, 218, 0.85);
   --card-link-hover-color:rgba(40, 155, 218, 1);
   --card-body-hover-tint: rgba(255, 255, 255, 0.6);
@@ -51,7 +51,7 @@
   --icon-active-color: #00aeff;
   --highlight-color: #90caf9;
   --card-body-color: rgb(48, 48, 48);
-  --home-bg-tint-color: rgba(26, 26, 26, 0.425);
+  --home-bg-tint-color: rgba(26, 26, 26, 0.507);
   --card-link-color: #e7e7e7;
   --card-link-hover-color:rgba(40, 155, 218, 1);
   --card-body-hover-tint: rgba(34, 34, 34, 0.6);

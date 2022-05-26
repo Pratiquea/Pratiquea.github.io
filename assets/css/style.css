@@ -428,6 +428,10 @@ input:checked + .theme-switch-text{
   padding-bottom: 1rem;
 }  
 
+#hero .hero-container .cen p{
+  text-align: center;
+}
+
 #hero h1 {
   margin: 0 0 1.5rem 0;
   font-size: 6rem;
@@ -510,11 +514,17 @@ input:checked + .theme-switch-text{
     width: 100%;
     height: 100%;
   }
+  #hero .hero-container .cen p{
+    text-align: left;
+  }
 }
 
 @media (max-width: 320px) {
   #hero .hero-container {
     padding-left: 3rem;
+  }
+  #hero .hero-container .cen p{
+    text-align: left;
   }
 }
 

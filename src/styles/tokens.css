@@ -1,0 +1,54 @@
+/* Color tokens. Light (Warm Paper + Ember) is the default; dark (Black +
+   Periwinkle) applies when <html data-theme="dark">. Components only use
+   these variables, so the palette lives entirely in this file. */
+
+:root {
+  color-scheme: light;
+  --bg: #f3eee4;
+  --surface: #fbf8f1;
+  --text: #1f2328;
+  --muted: #5d574d;
+  --accent: #a8431a;
+  --accent-contrast: #ffffff;
+  --border: #d6cbb6;
+  --divider: #e2d9c8;
+  --thumb: #e3d9c6;
+  --award-bg: #f6dcc0;
+  --award-text: #7a2e0b;
+  --logo-plate: #fbf8f1;
+
+  --hero-tint: rgba(28, 23, 18, 0.5);
+  /* Darkens the bottom of the hero video (no blend into the page). */
+  --hero-fade: rgba(20, 16, 12, 0.6);
+  --hero-text: #ffffff;
+  --hero-accent: #f0a574;
+  --nav-solid: rgba(243, 238, 228, 0.86);
+
+  --font: 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --radius: 10px;
+  --nav-h: 64px;
+  --container: 1080px;
+  --gutter: clamp(16px, 5vw, 48px);
+  --section-pad: clamp(72px, 11vw, 128px);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #040404;
+  --surface: #111114;
+  --text: #f2f1f2;
+  --muted: #a09ea8;
+  --accent: #95a1f9;
+  --accent-contrast: #040404;
+  --border: #62626f;
+  --divider: #2a2a33;
+  --thumb: #17171d;
+  --award-bg: #241f0e;
+  --award-text: #f2c55c;
+  --logo-plate: #f2f1f2;
+
+  --hero-tint: rgba(4, 4, 4, 0.55);
+  --hero-fade: rgba(0, 0, 0, 0.6);
+  --hero-accent: #95a1f9;
+  --nav-solid: rgba(4, 4, 4, 0.82);
+}

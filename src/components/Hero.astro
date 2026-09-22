@@ -1,0 +1,172 @@
+---
+import { getImage } from 'astro:assets';
+import SocialIcons from './SocialIcons.astro';
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { asset } from '../lib/images';
+
+const posterSrc = asset('hero', site.heroPoster);
+const poster = posterSrc ? await getImage({ src: posterSrc, width: 1920, format: 'avif', quality: 55 }) : undefined;
+const [first] = site.heroVideos;
+---
+
+<section id="top" class="hero" aria-label="Introduction">
+  <div class="hero__media" data-hero-media>
+    <video
+      class="hero__video"
+      data-hero-video
+      data-playlist={JSON.stringify(site.heroVideos)}
+      poster={poster?.src}
+      autoplay
+      muted
+      playsinline
+      preload="auto"
+      aria-hidden="true"
+      tabindex="-1"
+    >
+      {first && <source src={first.mobile} type="video/mp4" media="(max-width: 700px)" />}
+      {first && <source src={first.desktop} type="video/mp4" />}
+    </video>
+    <div class="hero__tint"></div>
+  </div>
+
+  <div class="hero__content container" data-hero-content>
+    <h1 class="hero__name">{site.name}</h1>
+    <p class="hero__title">{site.title}</p>
+    {site.tagline && <p class="hero__tagline">{site.tagline}</p>}
+    <SocialIcons size="lg" class="hero__socials" />
+  </div>
+
+  <a class="hero__cue" href="#about" aria-label="Scroll to About">
+    <Icon name="lucide:chevron-down" size={26} />
+  </a>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 560px;
+    height: 100vh;
+    height: 100svh;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    color: var(--hero-text);
+    background: #0d0d0d;
+  }
+
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
+  }
+  .hero__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  /* Tint for legibility, plus a fade into the page background at the bottom. */
+  .hero__tint {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, transparent 55%, var(--hero-fade) 100%),
+      var(--hero-tint);
+  }
+
+  .hero__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+  .hero__name {
+    font-size: clamp(2.6rem, 8vw, 4.8rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero__title {
+    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    font-weight: 500;
+    color: var(--hero-accent);
+    animation: rise 0.9s 0.12s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero__tagline {
+    max-width: 36ch;
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    opacity: 0.85;
+    animation: rise 0.9s 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero__content :global(.hero__socials) {
+    margin-top: 14px;
+    animation: rise 0.9s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+
+  .hero__cue {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    translate: -50% 0;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    color: var(--hero-text);
+    opacity: 0.8;
+    animation: bob 2.2s ease-in-out infinite;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+  }
+  @keyframes bob {
+    50% {
+      transform: translateY(6px);
+    }
+  }
+</style>
+
+<script>
+  type Clip = { desktop: string; mobile: string };
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+
+  if (video) {
+    const playlist: Clip[] = JSON.parse(video.dataset.playlist || '[]');
+    const small = matchMedia('(max-width: 700px)');
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0;
+
+    const srcFor = (clip: Clip) => (small.matches ? clip.mobile : clip.desktop);
+
+    function load(i: number, autoplay = true) {
+      index = i;
+      video!.src = srcFor(playlist[i]);
+      video!.load();
+      if (autoplay && !reduce.matches) video!.play().catch(() => {});
+    }
+
+    if (reduce.matches) video.pause();
+    if (playlist.length === 1) video.loop = true;
+
+    // Play the clips one after another, forever (same as the old site).
+    video.addEventListener('ended', () => {
+      if (playlist.length > 1) load((index + 1) % playlist.length);
+    });
+
+    // Switch between desktop and mobile files when the viewport crosses 700px.
+    small.addEventListener('change', () => load(index, !video.paused));
+
+    // Don't decode video while the hero is off-screen.
+    new IntersectionObserver(([e]) => {
+      if (reduce.matches) return;
+      if (e.isIntersecting) video.play().catch(() => {});
+      else video.pause();
+    }).observe(video);
+  }
+</script>

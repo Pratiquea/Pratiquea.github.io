@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import NavBar from '../components/NavBar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Research from '../components/Research.astro';
+import Projects from '../components/Projects.astro';
+import Footer from '../components/Footer.astro';
+import { publications } from '../lib/data';
+
+// Nav links only for sections that actually render (Research is hidden in
+// production until publications.yaml has entries).
+const sections = [
+  { id: 'about', label: 'About' },
+  ...(publications.length > 0 || import.meta.env.DEV ? [{ id: 'research', label: 'Research' }] : []),
+  { id: 'projects', label: 'Projects' },
+];
+---
+
+<Base>
+  <NavBar slot="header" sections={sections} />
+  <Hero />
+  <About />
+  <Research />
+  <Projects />
+  <Footer slot="footer" />
+</Base>

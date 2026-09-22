@@ -1,0 +1,59 @@
+---
+import Icon from './Icon.astro';
+---
+
+<button class="theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
+  <span class="icon-moon"><Icon name="lucide:moon" size={18} /></span>
+  <span class="icon-sun"><Icon name="lucide:sun" size={18} /></span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    color: inherit;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  .theme-toggle:hover {
+    border-color: currentColor;
+  }
+  .icon-sun {
+    display: none;
+  }
+  :global([data-theme='dark']) .icon-sun {
+    display: block;
+  }
+  :global([data-theme='dark']) .icon-moon {
+    display: none;
+  }
+</style>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+  const root = document.documentElement;
+
+  function sync() {
+    const dark = root.dataset.theme === 'dark';
+    buttons.forEach((b) => b.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode'));
+  }
+
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => {
+      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      if (next === 'dark') root.dataset.theme = 'dark';
+      else delete root.dataset.theme;
+      try {
+        localStorage.setItem('theme', next);
+      } catch {}
+      sync();
+    }),
+  );
+  sync();
+</script>

@@ -1,0 +1,47 @@
+---
+import SocialIcons from './SocialIcons.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import { site } from '../data/site';
+
+const updated = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+---
+
+<footer class="footer">
+  <div class="footer__inner container">
+    <div>
+      <p class="footer__name">© {new Date().getFullYear()} {site.name}</p>
+      <p class="footer__meta">Last updated {updated}</p>
+    </div>
+    <div class="footer__tools">
+      <SocialIcons size="sm" />
+      <ThemeToggle />
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--divider);
+    padding-block: 28px;
+  }
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .footer__name {
+    font-weight: 500;
+  }
+  .footer__meta {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .footer__tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+  }
+</style>

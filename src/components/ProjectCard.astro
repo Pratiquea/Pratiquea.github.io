@@ -1,0 +1,128 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Icon from './Icon.astro';
+import { asset } from '../lib/images';
+import type { Project } from '../lib/data';
+
+interface Props {
+  project: Project;
+  extra?: boolean;
+}
+const { project, extra = false } = Astro.props;
+
+const thumb = asset('projects', project.image);
+const poster = thumb && project.video ? await getImage({ src: thumb, width: 640, format: 'webp' }) : undefined;
+const initials = project.title
+  .split(/\s+/)
+  .slice(0, 2)
+  .map((w) => w[0])
+  .join('');
+---
+
+<article class="card" data-reveal="fade" data-extra={extra ? '' : undefined}>
+  <div class="card__media">
+    {
+      project.video ? (
+        <video
+          data-lazy-video
+          data-src={project.video}
+          poster={poster?.src}
+          muted
+          loop
+          playsinline
+          preload="none"
+          aria-label={`Clip: ${project.title}`}
+        />
+      ) : thumb ? (
+        <Image
+          src={thumb}
+          alt=""
+          width={640}
+          widths={[320, 640]}
+          sizes="(max-width: 700px) 100vw, 340px"
+          loading="lazy"
+        />
+      ) : (
+        <span class="card__initials" aria-hidden="true">
+          {initials}
+        </span>
+      )
+    }
+  </div>
+  <div class="card__body">
+    <h3 class="card__title">{project.title}</h3>
+    {project.description && <p class="card__desc">{project.description}</p>}
+    <div class="card__footer">
+      {project.tag && <span class="chip">{project.tag}</span>}
+      {
+        project.code && (
+          <a class="badge card__code" href={project.code} target="_blank" rel="noopener noreferrer">
+            <Icon name="mdi:github" size={14} />
+            Code
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    border-color: var(--border);
+  }
+  .card__media {
+    aspect-ratio: 16 / 10;
+    background: var(--thumb);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+  }
+  .card__media :global(img),
+  .card__media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .card__initials {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--muted);
+    opacity: 0.6;
+  }
+  .card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px 18px 18px;
+    flex-grow: 1;
+  }
+  .card__title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .card__desc {
+    font-size: 0.86rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .card__footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 8px;
+  }
+  .card__code {
+    margin-left: auto;
+  }
+</style>

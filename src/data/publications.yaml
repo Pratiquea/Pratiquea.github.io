@@ -1,0 +1,378 @@
+# Publications, in the order they should appear (newest first).
+# No year grouping — just list them.
+#
+# Fields:
+#   title:    required
+#   authors:  list; names in site.ts `authorNames` are bolded. Add "*" for
+#             equal contribution, e.g. "Prateek Arora*".
+#   venue:    e.g. "IEEE International Conference on Robotics and Automation (ICRA), 2025"
+#   award:    optional highlight tag, e.g. "Best Paper Finalist"
+#   media:    optional, shown on the left:
+#               video:  looping clip in public/media/papers/ → "/media/papers/foo.mp4"
+#                       (convert GIFs with: scripts/gif-to-mp4.sh input.gif)
+#               image:  still image in src/assets/papers/ → "foo.png"
+#                       (with a video, the image is used as its poster frame)
+#   links:    all optional; only the ones you fill in get a button
+#               paper, code, website, video: URLs
+#               bibtex: the BibTeX entry (multi-line, use the "|" block style) —
+#                       its button copies it to the clipboard
+#
+
+# Example (copy, uncomment, edit):
+#
+# - title: "Your Paper Title"
+#   authors: ["Prateek Arora", "Co Author", "Christos Papachristos"]
+#   venue: "IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2025"
+#   award: "Oral"
+#   media:
+#     video: /media/papers/your-paper.mp4
+#     image: your-paper.jpg
+#   links:
+#     paper: https://arxiv.org/abs/xxxx.xxxxx
+#     code: https://github.com/pratiquea/your-repo
+#     website: https://your-project-page.github.io
+#     video: https://youtu.be/xxxx
+#     bibtex: |
+#       @inproceedings{arora2025paper, ...}
+#
+# Entries below were imported from Google Scholar (citations.csv). Add media,
+# links and awards to each as you go.
+
+- title: "An Oceanic Small-UAS with Near–Surface Soaring Flight Sensory Design and Onboard Deep-Learned Meteorological Perception"
+  authors: ["Stephen J. Carlson", "Prateek Arora", "Christos Papachristos"]
+  venue: "International Conference on Unmanned Aircraft Systems (ICUAS), 2026"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=xXgd0BBCmxw
+    bibtex: |
+      @inproceedings{carlson2026oceanic,
+        title={{An Oceanic Small-UAS with Near–Surface Soaring Flight Sensory Design and Onboard Deep-Learned Meteorological Perception}},
+        author={Carlson, Stephen J. and Arora, Prateek and Papachristos, Christos},
+        booktitle={International Conference on Unmanned Aircraft Systems (ICUAS)},
+        pages={750--758},
+        year={2026},
+        publisher={IEEE}
+      }
+
+- title: "Verification and Validation of a Vision-Based Landing System for Autonomous VTOL Air Taxis"
+  authors: ["Ayoosh Bansal", "Duo Wang", "Mikael Yeghiazaryan", "Yangge Li", "Chuyuan Tao", "Hyung-Jin Yoon", "Prateek Arora", "Christos Papachristos", "Petros Voulgaris", "Sayan Mitra"]
+  venue: "AIAA SciTech Forum, 2025"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    # video: 
+    bibtex: |
+      @inproceedings{bansal2025verification,
+        title={{Verification and Validation of a Vision-Based Landing System for Autonomous VTOL Air Taxis}},
+        author={Bansal, Ayoosh and Wang, Duo and Yeghiazaryan, Mikael and Li, Yangge and Tao, Chuyuan and Yoon, Hyung-Jin and Arora, Prateek and Papachristos, Christos and Voulgaris, Petros and Mitra, Sayan},
+        booktitle={AIAA SciTech Forum},
+        pages={1322},
+        year={2025}
+      }
+
+- title: "Towards Perpetually-Deployable Ubiquitous Aerial Robotics: An Amphibious Self-Sustainable Solar Small-UAS"
+  authors: ["Stephen J. Carlson", "Prateek Arora", "Christos Papachristos"]
+  venue: "IEEE International Conference on Robotics and Automation (ICRA), 2025"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=0SwTt-TAJR4
+    bibtex: |
+      @inproceedings{carlson2025towards,
+        title={{Towards Perpetually-Deployable Ubiquitous Aerial Robotics: An Amphibious Self-Sustainable Solar Small-UAS}},
+        author={Carlson, Stephen J. and Arora, Prateek and Papachristos, Christos},
+        booktitle={IEEE International Conference on Robotics and Automation (ICRA)},
+        pages={295--302},
+        year={2025},
+        publisher={IEEE}
+      }
+
+- title: "UAV-Based Foliage Plant Species Classification for Semantic Characterization of Pre-Fire Landscapes"
+  authors: ["Prateek Arora", "Pau Alcolea Vila", "Aiden Borghese", "Stephen J. Carlson", "David Feil-Seifer", "Christos Papachristos"]
+  venue: "International Conference on Unmanned Aircraft Systems (ICUAS), 2024"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=xugIE_RYFhY
+    bibtex: |
+      @inproceedings{arora2024uav,
+        title={{UAV-Based Foliage Plant Species Classification for Semantic Characterization of Pre-Fire Landscapes}},
+        author={Arora, Prateek and Vila, Pau Alcolea and Borghese, Aiden and Carlson, Stephen J. and Feil-Seifer, David and Papachristos, Christos},
+        booktitle={International Conference on Unmanned Aircraft Systems (ICUAS)},
+        pages={792--799},
+        year={2024},
+        publisher={IEEE}
+      }
+
+- title: "Combined Docking-and-Recharging for a Flexible Aerial/Legged Marsupial Autonomous System"
+  authors: ["Brandon Moore", "Stephen J. Carlson", "Prateek Arora", "Eleni S. Avlonitis", "Tolga Karakurt", "David Feil-Seifer", "Christos Papachristos"]
+  venue: "IEEE Aerospace Conference, 2023"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=onirlj6xKE4
+    bibtex: |
+      @inproceedings{moore2023combined,
+        title={{Combined Docking-and-Recharging for a Flexible Aerial/Legged Marsupial Autonomous System}},
+        author={Moore, Brandon and Carlson, Stephen J. and Arora, Prateek and Avlonitis, Eleni S. and Karakurt, Tolga and Feil-Seifer, David and Papachristos, Christos},
+        booktitle={IEEE Aerospace Conference},
+        pages={1--9},
+        year={2023},
+        publisher={IEEE}
+      }
+
+- title: "Deep Learning–Based Reassembling of an Aerial & Legged Marsupial Robotic System–of–Systems"
+  authors: ["Prateek Arora", "Tolga Karakurt", "Eleni Avlonitis", "Stephen J. Carlson", "Brandon Moore", "David Feil-Seifer", "Christos Papachristos"]
+  venue: "International Conference on Unmanned Aircraft Systems (ICUAS), 2023"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=Y5_FF_JmObY
+    bibtex: |
+      @inproceedings{arora2023deep,
+        title={{Deep Learning–Based Reassembling of an Aerial & Legged Marsupial Robotic System–of–Systems}},
+        author={Arora, Prateek and Karakurt, Tolga and Avlonitis, Eleni and Carlson, Stephen J. and Moore, Brandon and Feil-Seifer, David and Papachristos, Christos},
+        booktitle={International Conference on Unmanned Aircraft Systems (ICUAS)},
+        pages={626--633},
+        year={2023},
+        publisher={IEEE}
+      }
+
+- title: "The Gannet Solar–VTOL: An Amphibious Migratory UAV for Long–Term Autonomous Missions"
+  authors: ["Stephen J. Carlson", "Brandon Moore", "Tolga Karakurt", "Prateek Arora", "Tyler Cooper", "Christos Papachristos"]
+  venue: "International Conference on Unmanned Aircraft Systems (ICUAS), 2023"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=7ScDoOkWL0g
+    bibtex: |
+      @inproceedings{carlson2023gannet,
+        title={{The Gannet Solar–VTOL: An Amphibious Migratory UAV for Long–Term Autonomous Missions}},
+        author={Carlson, Stephen J. and Moore, Brandon and Karakurt, Tolga and Arora, Prateek and Cooper, Tyler and Papachristos, Christos},
+        booktitle={International Conference on Unmanned Aircraft Systems (ICUAS)},
+        pages={419--424},
+        year={2023},
+        publisher={IEEE}
+      }
+
+- title: "Towards Multi-Day Field Deployment Autonomy: A Long-Term Self-Sustainable Micro Aerial Vehicle Robot"
+  authors: ["Stephen J. Carlson", "Prateek Arora", "Tolga Karakurt", "Brandon Moore", "Christos Papachristos"]
+  venue: "IEEE International Conference on Robotics and Automation (ICRA), 2023"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=SFrsvQurrq0
+    bibtex: |
+      @inproceedings{carlson2023towards,
+        title={{Towards Multi-Day Field Deployment Autonomy: A Long-Term Self-Sustainable Micro Aerial Vehicle Robot}},
+        author={Carlson, Stephen J. and Arora, Prateek and Karakurt, Tolga and Moore, Brandon and Papachristos, Christos},
+        booktitle={IEEE International Conference on Robotics and Automation (ICRA)},
+        pages={11396--11403},
+        year={2023},
+        publisher={IEEE}
+      }
+
+- title: "A Multi-VTOL Modular Aspect Ratio Reconfigurable Aerial Robot"
+  authors: ["Stephen J. Carlson", "Prateek Arora", "Christos Papachristos"]
+  venue: "IEEE International Conference on Robotics and Automation (ICRA), 2022"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=pVbJudrOTGY
+    bibtex: |
+      @inproceedings{carlson2022multi,
+        title={{A Multi-VTOL Modular Aspect Ratio Reconfigurable Aerial Robot}},
+        author={Carlson, Stephen J. and Arora, Prateek and Papachristos, Christos},
+        booktitle={IEEE International Conference on Robotics and Automation (ICRA)},
+        pages={8--15},
+        year={2022},
+        publisher={IEEE}
+      }
+
+- title: "Deep-Learned Autonomous Landing Site Discovery for a Tiltrotor Micro Aerial Vehicle"
+  authors: ["Prateek Arora", "Stephen J. Carlson", "Tolga Karakurt", "Christos Papachristos"]
+  venue: "International Conference on Unmanned Aircraft Systems (ICUAS), 2022"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=HHUyQkon7Do
+    bibtex: |
+      @inproceedings{arora2022deep,
+        title={{Deep-Learned Autonomous Landing Site Discovery for a Tiltrotor Micro Aerial Vehicle}},
+        author={Arora, Prateek and Carlson, Stephen J. and Karakurt, Tolga and Papachristos, Christos},
+        booktitle={International Conference on Unmanned Aircraft Systems (ICUAS)},
+        pages={255--262},
+        year={2022},
+        publisher={IEEE}
+      }
+
+- title: "Integrated Solar Power Harvesting and Hibernation for a Recurrent-Mission VTOL Micro Aerial Vehicle"
+  authors: ["Stephen J. Carlson", "Tolga Karakurt", "Prateek Arora", "Christos Papachristos"]
+  venue: "International Conference on Unmanned Aircraft Systems (ICUAS), 2022"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=cy3vB7kjI1Q
+    bibtex: |
+      @inproceedings{carlson2022integrated,
+        title={{Integrated Solar Power Harvesting and Hibernation for a Recurrent-Mission VTOL Micro Aerial Vehicle}},
+        author={Carlson, Stephen J. and Karakurt, Tolga and Arora, Prateek and Papachristos, Christos},
+        booktitle={International Conference on Unmanned Aircraft Systems (ICUAS)},
+        pages={237--244},
+        year={2022},
+        publisher={IEEE}
+      }
+
+- title: "Launching a Micro–Scout UAV from a Mobile Robotic Manipulator Arm"
+  authors: ["Prateek Arora", "Christos Papachristos"]
+  venue: "IEEE Aerospace Conference, 2021"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    # video: 
+    bibtex: |
+      @inproceedings{arora2021launching,
+        title={{Launching a Micro–Scout UAV from a Mobile Robotic Manipulator Arm}},
+        author={Arora, Prateek and Papachristos, Christos},
+        booktitle={IEEE Aerospace Conference},
+        pages={8},
+        year={2021}
+      }
+
+- title: "Mobile Manipulation–Based Deployment of Micro Aerial Robot Scouts through Constricted Aperture-Like Ingress Points"
+  authors: ["Prateek Arora", "Christos Papachristos"]
+  venue: "IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), 2021"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=Avt0Gnv3CAI
+    bibtex: |
+      @inproceedings{arora2021mobile,
+        title={{Mobile Manipulation–Based Deployment of Micro Aerial Robot Scouts through Constricted Aperture-Like Ingress Points}},
+        author={Arora, Prateek and Papachristos, Christos},
+        booktitle={IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+        pages={6716--6723},
+        year={2021},
+        publisher={IEEE}
+      }
+
+- title: "Environment Reconfiguration Planning for Autonomous Robotic Manipulation to Overcome Mobility Constraints"
+  authors: ["Prateek Arora", "Christos Papachristos"]
+  venue: "IEEE International Conference on Robotics and Automation (ICRA), 2021"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=SZ4iBklkZVo
+    bibtex: |
+      @inproceedings{arora2021environment,
+        title={{Environment Reconfiguration Planning for Autonomous Robotic Manipulation to Overcome Mobility Constraints}},
+        author={Arora, Prateek and Papachristos, Christos},
+        booktitle={IEEE International Conference on Robotics and Automation (ICRA)},
+        pages={2352--2358},
+        year={2021},
+        publisher={IEEE}
+      }
+
+- title: "Mobile Manipulator Robot Visual Servoing and Guidance for Dynamic Target Grasping"
+  authors: ["Prateek Arora", "Christos Papachristos"]
+  venue: "International Symposium on Visual Computing (ISVC), 2020"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    video: https://www.youtube.com/watch?v=UpREPxifF8I
+    bibtex: |
+      @inproceedings{arora2020mobile,
+        title={{Mobile Manipulator Robot Visual Servoing and Guidance for Dynamic Target Grasping}},
+        author={Arora, Prateek and Papachristos, Christos},
+        booktitle={International Symposium on Visual Computing (ISVC)},
+        pages={223--235},
+        year={2020},
+        publisher={Springer International Publishing Cham}
+      }
+
+- title: "Mobile Surveillance Spheroid Robot with Static Equilibrium Camera, Leaping Mechanism and KLT Algorithm Based Detection with Tracking"
+  authors: ["Shamsheer Verma", "Chahatdeep Singh", "Sarthak Mittal", "Prateek Arora", "Arvind Rehalia"]
+  venue: "International Journal of Control Theory and Applications, vol. 9, no. 41, 2016"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    # video: 
+    bibtex: |
+      @article{verma2016mobile,
+        title={{Mobile Surveillance Spheroid Robot with Static Equilibrium Camera, Leaping Mechanism and KLT Algorithm Based Detection with Tracking}},
+        author={Verma, Shamsheer and Singh, Chahatdeep and Mittal, Sarthak and Arora, Prateek and Rehalia, Arvind},
+        journal={International Journal of Control Theory and Applications},
+        volume={9},
+        number={41},
+        pages={473--488},
+        year={2016}
+      }
+
+- title: "Control of Wheelchair Dummy for Differently Abled Patients via Iris Movement Using Image Processing in MATLAB"
+  authors: ["Prateek Arora", "Anshul Sharma", "Anmoal Singh Soni", "Aman Garg"]
+  venue: "IEEE India Conference (INDICON), 2015"
+  # award: ""
+  # media: { video: /media/papers/FILE.mp4, image: FILE.jpg }
+  links:
+    # paper: 
+    # code: 
+    # website: 
+    # video: 
+    bibtex: |
+      @inproceedings{arora2015control,
+        title={{Control of Wheelchair Dummy for Differently Abled Patients via Iris Movement Using Image Processing in MATLAB}},
+        author={Arora, Prateek and Sharma, Anshul and Soni, Anmoal Singh and Garg, Aman},
+        booktitle={IEEE India Conference (INDICON)},
+        pages={1--4},
+        year={2015},
+        publisher={IEEE}
+      }

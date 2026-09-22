@@ -1,0 +1,119 @@
+# Projects (manual entries), in display order. Pre-filled with the 18 course
+# projects from the old site. GitHub repos tagged with the topic set in
+# site.ts (default "showcase") are appended automatically at build time.
+#
+# Fields:
+#   title, description: required
+#   tag:    category chip, e.g. "Aerial Robotics"
+#   image:  thumbnail in src/assets/projects/ (optional)
+#   video:  optional looping clip in public/media/projects/ → "/media/projects/foo.mp4"
+#           (plays when the card scrolls into view; `image` becomes its poster)
+#   code:   URL for the "Code" button (optional)
+
+- title: Unscented Kalman Filter
+  description: Estimation of IMU orientation using an Unscented Kalman Filter.
+  tag: Aerial Robotics
+  image: ukf.jpg
+  code: https://github.com/Pratiquea/Hands-on-autonomous-aerial-robotics/tree/master/UKF
+
+- title: Face Swap
+  description: End-to-end pipeline to swap faces in a video, just like Snapchat's face swap filter.
+  tag: Computer Vision
+  image: face-swap.jpg
+  code: https://github.com/Pratiquea/CMSC733-Computer-Vision/tree/master/Face_Swap
+
+- title: Path Planning with Differential Constraints
+  description: A* path planning with differential constraints on a TurtleBot in Gazebo.
+  tag: Path Planning
+  image: turtle_diff.png
+  code: https://github.com/Pratiquea/ENPM661-planning/tree/master/A_star_differential_constraints
+
+- title: Landing on Circular Bullseye
+  description: Estimated the 3D pose of a CCTag marker in real time to land a quadrotor on it.
+  tag: Aerial Robotics
+  image: land_cc.png
+  code: https://github.com/Pratiquea/Hands-on-autonomous-aerial-robotics/tree/master/CC_tag_detection
+
+- title: Auto Panorama
+  description: Panorama stitching using deep-learning and traditional approaches.
+  tag: Computer Vision
+  image: pano_light.png
+  code: https://github.com/Pratiquea/CMSC733-Computer-Vision/tree/master/AutoPano
+
+- title: A* Algorithm
+  description: Implemented A* to find a path from start to goal in a static map.
+  tag: Path Planning
+  image: path_planning_a.png
+  code: https://github.com/Pratiquea/ENPM661-planning/tree/master/Dijkstra_and_A*%5Bp2%5D
+
+- title: Dijkstra's Algorithm
+  description: Implemented Dijkstra's algorithm to find a path from start to goal in a static map.
+  tag: Path Planning
+  image: path_planning_dij.png
+  code: https://github.com/Pratiquea/ENPM661-planning/tree/master/Dijkstra_and_A*%5Bp2%5D
+
+- title: Madgwick Filter
+  description: Estimation of IMU orientation using a Madgwick filter.
+  tag: Aerial Robotics
+  image: madgwick.png
+  code: https://github.com/Pratiquea/Hands-on-autonomous-aerial-robotics/tree/master/madgwick_filter
+
+- title: PB-Lite Boundary Detection
+  description: Boundary detection using a modified Probability of Boundary method.
+  tag: Computer Vision
+  image: pblite.png
+  code: https://github.com/Pratiquea/CMSC733-Computer-Vision
+
+- title: Flying Through Gaps
+  description: Gaussian Mixture Model to detect coloured windows, used as feedback to autonomously fly a drone through them.
+  tag: Aerial Robotics
+  image: gapflyt.png
+  code: https://github.com/Pratiquea/Hands-on-autonomous-aerial-robotics/tree/master/Window_detection
+
+- title: Structure from Motion
+  description: Reconstructed a 3D scene and recovered the camera poses from multiple images.
+  tag: Computer Vision
+  image: sfm.png
+  code: https://github.com/Pratiquea/CMSC733-Computer-Vision
+
+- title: Avoid Wall using Optical Flow
+  description: Detected a wall in real time with a monocular camera on a quadrotor, then avoided it.
+  tag: Aerial Robotics
+  image: wall.png
+  code: https://github.com/Pratiquea/Hands-on-autonomous-aerial-robotics/tree/master/Wall_detection
+
+- title: Safe Autonomous Navigation
+  description: Detected a bridge across a river and navigated a quadrotor to the other side by flying over it.
+  tag: Aerial Robotics
+  image: river_focus.png
+  code: https://github.com/Pratiquea/Hands-on-autonomous-aerial-robotics/tree/master/Bridge_detection
+
+- title: Stereo Pose Estimation
+  description: Estimated the 3D trajectory of a stereo-camera quadrotor using the optical flow equation.
+  tag: Aerial Robotics
+  image: svo.jpeg
+  code: https://github.com/Pratiquea/Hands-on-autonomous-aerial-robotics/tree/master/StereoVisualOdometry
+
+- title: Image Classification using CNNs
+  description: Implemented and evaluated different CNN architectures for image classification.
+  tag: Computer Vision
+  image: cnn_im.jpg
+  code: https://github.com/Pratiquea/CMSC733-Computer-Vision/tree/master/Image_Classification
+
+- title: Camera Calibration
+  description: Estimated intrinsic camera parameters — focal length, distortion coefficients and principal point.
+  tag: Computer Vision
+  image: calib.png
+  code: https://github.com/Pratiquea/Hands-on-autonomous-aerial-robotics/tree/master/StereoVisualOdometry
+
+- title: Pick and Place with Baxter
+  description: Simple pick and place using Baxter's ROS API with its built-in kinematics and inverse-kinematics engine.
+  tag: Path Planning
+  image: baxter.png
+  code: https://github.com/Pratiquea/ENPM661-planning/tree/master/
+
+- title: 8-Puzzle Solver
+  description: Solved the 8-piece puzzle with brute-force search to reach a goal tile configuration.
+  tag: Path Planning
+  image: 8puzzle_w.png
+  code: https://github.com/Pratiquea/ENPM661-planning/tree/master/Brute_force_search%5Bp1%5D

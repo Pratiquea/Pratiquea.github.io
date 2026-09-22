@@ -1,0 +1,252 @@
+---
+import SocialIcons from './SocialIcons.astro';
+import ThemeToggle from './ThemeToggle.astro';
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+interface Props {
+  sections: { id: string; label: string }[];
+}
+const { sections } = Astro.props;
+---
+
+<header class="nav" data-nav>
+  <div class="nav__inner container">
+    <a class="nav__brand" href="#top">{site.name}</a>
+
+    <nav class="nav__menu" id="nav-menu" aria-label="Sections" data-nav-menu>
+      <ul class="nav__links">
+        {
+          sections.map((s) => (
+            <li>
+              <a href={`#${s.id}`} data-nav-link={s.id}>
+                {s.label}
+              </a>
+            </li>
+          ))
+        }
+        {
+          site.cv && (
+            <li>
+              <a href={site.cv} target="_blank" rel="noopener">
+                CV
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </nav>
+
+    <div class="nav__tools">
+      <SocialIcons size="sm" class="nav__socials" />
+      <ThemeToggle />
+      <button
+        class="nav__burger"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="nav-menu"
+        data-nav-burger
+      >
+        <span class="burger-open"><Icon name="lucide:menu" size={22} /></span>
+        <span class="burger-close"><Icon name="lucide:x" size={22} /></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    height: var(--nav-h);
+    color: var(--hero-text);
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  }
+  .nav.is-solid,
+  .nav.is-open {
+    background: var(--nav-solid);
+    color: var(--text);
+    border-bottom-color: var(--divider);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+
+  .nav__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .nav__brand {
+    font-weight: 600;
+    font-size: 1.05rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .nav__links {
+    display: flex;
+    gap: 28px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 0.92rem;
+  }
+  .nav__links a {
+    position: relative;
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+  .nav__links a:hover,
+  .nav__links a[aria-current='true'] {
+    opacity: 1;
+  }
+  .nav__links a[aria-current='true']::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  .nav__tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* Social icons fade into the nav once the hero has scrolled away. */
+  .nav :global(.nav__socials) {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s;
+  }
+  .nav.is-solid :global(.nav__socials) {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .nav__burger {
+    display: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    color: inherit;
+    background: none;
+    border: 0;
+    cursor: pointer;
+  }
+  .burger-close {
+    display: none;
+  }
+  .nav.is-open .burger-open {
+    display: none;
+  }
+  .nav.is-open .burger-close {
+    display: block;
+  }
+
+  @media (max-width: 760px) {
+    .nav__burger {
+      display: grid;
+    }
+    .nav :global(.nav__socials) {
+      display: none;
+    }
+    .nav__menu {
+      position: absolute;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--divider);
+      display: none;
+    }
+    .nav.is-open .nav__menu {
+      display: block;
+    }
+    .nav__links {
+      flex-direction: column;
+      gap: 0;
+      padding: 8px var(--gutter) 16px;
+      font-size: 1.05rem;
+    }
+    .nav__links a {
+      display: block;
+      padding: 12px 0;
+    }
+    .nav__links a[aria-current='true']::after {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const nav = document.querySelector<HTMLElement>('[data-nav]')!;
+  const hero = document.getElementById('top');
+  const burger = document.querySelector<HTMLButtonElement>('[data-nav-burger]')!;
+  const menu = document.querySelector<HTMLElement>('[data-nav-menu]')!;
+
+  // Solid background (and social icons) once the hero is mostly out of view.
+  if (hero) {
+    new IntersectionObserver(
+      ([entry]) => nav.classList.toggle('is-solid', !entry.isIntersecting),
+      { rootMargin: `-${nav.offsetHeight}px 0px 0px 0px`, threshold: 0 },
+    ).observe(hero);
+  } else {
+    nav.classList.add('is-solid');
+  }
+
+  // Highlight the section currently in the middle of the screen.
+  const links = new Map(
+    [...document.querySelectorAll<HTMLAnchorElement>('[data-nav-link]')].map((a) => [a.dataset.navLink!, a]),
+  );
+  const spy = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        links.forEach((a, id) => a.setAttribute('aria-current', String(id === e.target.id)));
+      });
+    },
+    { rootMargin: '-45% 0px -50% 0px' },
+  );
+  links.forEach((_, id) => {
+    const section = document.getElementById(id);
+    if (section) spy.observe(section);
+  });
+  if (hero) {
+    new IntersectionObserver(
+      ([e]) => e.isIntersecting && links.forEach((a) => a.setAttribute('aria-current', 'false')),
+      { rootMargin: '-45% 0px -50% 0px' },
+    ).observe(hero);
+  }
+
+  // Mobile menu.
+  function setOpen(open: boolean) {
+    nav.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  burger.addEventListener('click', () => setOpen(!nav.classList.contains('is-open')));
+  menu.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      setOpen(false);
+      burger.focus();
+    }
+  });
+</script>

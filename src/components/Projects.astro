@@ -1,0 +1,87 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { projects as manual } from '../lib/data';
+import { getShowcaseRepos } from '../lib/github';
+
+// Manual entries first, then GitHub repos tagged with the showcase topic
+// (skipping any repo already linked from a manual entry).
+const fromGitHub = await getShowcaseRepos(site.github.user, site.github.topic);
+const linked = new Set(manual.map((p) => p.code?.toLowerCase().replace(/\/$/, '')));
+const all = [...manual, ...fromGitHub.filter((p) => !linked.has(p.code?.toLowerCase()))];
+
+const visible = site.projectsInitiallyVisible;
+const hasMore = all.length > visible;
+---
+
+{
+  all.length > 0 && (
+    <section id="projects" class="section projects">
+      <div class="container">
+        <span class="eyebrow">Projects</span>
+        <h2 class="section-title" data-reveal="chars">
+          Projects
+        </h2>
+
+        <div class="projects__grid" data-projects-grid>
+          {all.map((project, i) => (
+            <ProjectCard project={project} extra={i >= visible} />
+          ))}
+        </div>
+
+        {hasMore && (
+          <div class="projects__more">
+            <button class="badge projects__toggle" type="button" data-projects-toggle hidden aria-expanded="false">
+              <span data-projects-label>Show all {all.length} projects</span>
+              <Icon name="lucide:chevron-down" size={14} />
+            </button>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .projects__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+    gap: clamp(16px, 2.5vw, 24px);
+  }
+  /* Collapsing only happens once JS has run, so no-JS visitors see every card. */
+  .projects__grid.is-collapsed :global([data-extra]) {
+    display: none;
+  }
+  .projects__more {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+  .projects__toggle {
+    padding: 8px 16px;
+  }
+  .projects__toggle[aria-expanded='true'] :global(svg) {
+    rotate: 180deg;
+  }
+</style>
+
+<script>
+  const grid = document.querySelector<HTMLElement>('[data-projects-grid]');
+  const toggle = document.querySelector<HTMLButtonElement>('[data-projects-toggle]');
+  const label = document.querySelector<HTMLElement>('[data-projects-label]');
+
+  if (grid && toggle && label) {
+    const openText = label.textContent ?? '';
+    grid.classList.add('is-collapsed');
+    toggle.hidden = false;
+    toggle.addEventListener('click', () => {
+      const collapsed = grid.classList.toggle('is-collapsed');
+      toggle.setAttribute('aria-expanded', String(!collapsed));
+      label.textContent = collapsed ? openText : 'Show fewer';
+      // Let scroll-driven effects re-measure the page height.
+      window.dispatchEvent(new Event('resize'));
+      if (collapsed) grid.scrollIntoView({ block: 'start' });
+    });
+  }
+</script>

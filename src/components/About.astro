@@ -1,0 +1,346 @@
+---
+import { Image } from 'astro:assets';
+import { Content as AboutText } from '../data/about.md';
+import { site } from '../data/site';
+import { lineage } from '../lib/data';
+import { asset } from '../lib/images';
+import { getLogo } from '../lib/logos';
+
+const photo = asset('profile', site.profilePhoto);
+const lineageLogos = await Promise.all(lineage.map((item) => Promise.all(item.logos.map(getLogo))));
+---
+
+<section id="about" class="section about">
+  <div class="container">
+    <span class="eyebrow">About</span>
+
+    <div class="about__intro">
+      {
+        photo && (
+          <Image
+            class="about__photo"
+            src={photo}
+            alt={site.name}
+            width={440}
+            height={440}
+            widths={[220, 440]}
+            sizes="220px"
+            fit="cover"
+            position="top"
+          />
+        )
+      }
+      <div class="about__text prose" data-reveal-first-paragraph>
+        <AboutText />
+      </div>
+    </div>
+
+    {
+      lineage.length > 0 && (
+        <div class="lineage">
+          <h3 class="lineage__title" data-reveal="chars">
+            Educational &amp; Professional Lineage
+          </h3>
+          <ol class="lineage__list">
+            {lineage.map((item, i) => {
+              const logos = lineageLogos[i];
+              return (
+                <li class="lineage__item" data-reveal="fade">
+                  <div class="lineage__text">
+                    <p class="lineage__role">{item.role}</p>
+                    <p class="lineage__place">
+                      {item.url ? (
+                        <a href={item.url} target="_blank" rel="noopener noreferrer">
+                          {item.place}
+                        </a>
+                      ) : (
+                        item.place
+                      )}
+                    </p>
+                    {item.advisor && <p class="lineage__meta">{item.advisor}</p>}
+                    {item.dates && <p class="lineage__meta lineage__dates">{item.dates}</p>}
+                    {item.focus && (
+                      <p class="lineage__focus">
+                        <span class="lineage__focus-label">|</span> {item.focus}
+                      </p>
+                    )}
+                  </div>
+                  <span class="lineage__dot" aria-hidden="true" />
+                  <div
+                    class="lineage__logos"
+                    style={`--row-a: ${Math.max(1, ...logos.map((l) => l.aspect)).toFixed(4)}`}
+                  >
+                    {logos.length > 0 ? (
+                      logos.map((logo) => {
+                        // Crop box = the logo's visible area; every logo in the row gets the
+                        // same box height, so tops, centres and bottoms line up.
+                        const vars = [
+                          `--a: ${logo.aspect.toFixed(4)}`,
+                          `--r: ${(logo.light.width / logo.light.height).toFixed(4)}`,
+                          `--vx: ${logo.visible.x.toFixed(4)}`,
+                          `--vy: ${logo.visible.y.toFixed(4)}`,
+                          `--vh: ${logo.visible.h.toFixed(4)}`,
+                        ].join('; ');
+                        const srcHeight = Math.min(logo.light.height, Math.round(416 / logo.visible.h));
+                        return (
+                          <span
+                            class:list={[
+                              'lineage__logo',
+                              {
+                                'is-inverted': logo.invertInDark,
+                                'lineage__logo--wide': logos.length === 1 && logo.aspect > 2,
+                              },
+                            ]}
+                            style={vars}
+                          >
+                            <Image
+                              src={logo.light}
+                              alt=""
+                              height={srcHeight}
+                              class:list={['lineage__img', { 'lineage__img--light': logo.dark }]}
+                            />
+                            {logo.dark && (
+                              <Image src={logo.dark} alt="" height={srcHeight} class="lineage__img lineage__img--dark" />
+                            )}
+                          </span>
+                        );
+                      })
+                    ) : (
+                      <span class="lineage__short">{item.short ?? ''}</span>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .about__intro {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: clamp(28px, 5vw, 56px);
+    align-items: start;
+  }
+  .about__intro :global(.about__photo) {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .about__text {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    color: var(--muted);
+  }
+  .about__text :global(p:first-of-type) {
+    font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+    line-height: 1.55;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .lineage {
+    margin-top: clamp(80px, 11vw, 136px);
+  }
+  .lineage__title {
+    text-align: center;
+    font-size: clamp(1.6rem, 3.6vw, 2.2rem);
+    font-weight: 600;
+    margin-bottom: clamp(40px, 6vw, 64px);
+  }
+
+  /* Timeline: text | line | logos */
+  .lineage__list {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(32px, 5vw, 56px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .lineage__list::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    translate: -1px 0;
+    background: var(--divider);
+  }
+  .lineage__item {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 80px minmax(0, 1fr);
+    align-items: center;
+    min-height: 208px;
+  }
+  .lineage__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: right;
+  }
+  .lineage__role {
+    font-weight: 600;
+    font-size: clamp(1.2rem, 2.2vw, 1.5rem);
+    line-height: 1.3;
+  }
+  .lineage__place {
+    font-size: clamp(1rem, 1.6vw, 1.15rem);
+  }
+  .lineage__place a {
+    text-decoration: none;
+  }
+  .lineage__place a:hover {
+    color: var(--accent);
+  }
+  .lineage__meta {
+    font-size: clamp(0.92rem, 1.4vw, 1.02rem);
+    color: var(--muted);
+  }
+  .lineage__dates {
+    font-weight: 500;
+  }
+  .lineage__focus {
+    margin-top: 6px;
+    font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+    font-style: italic;
+    color: var(--text);
+  }
+  .lineage__focus-label {
+    margin-right: 6px;
+    font-size: 0.72em;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .lineage__dot {
+    justify-self: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 6px var(--bg);
+    position: relative;
+  }
+  /* Two fixed logo slots per row, so the first logos of every row share one
+     vertical centre line and the second logos share another. A single wide
+     logo (e.g. a wordmark) spans both slots. */
+  .lineage__logos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    justify-items: center;
+    column-gap: 20px;
+    min-width: 0;
+    container-type: inline-size;
+    --max-h: 208px;
+  }
+  /* Box height: the tallest that lets the row's widest logo fit its slot. */
+  .lineage__logo {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    --h: min(var(--max-h), calc((50cqw - 10px) / var(--row-a)));
+    height: var(--h);
+    width: calc(var(--h) * var(--a));
+  }
+  .lineage__logo--wide {
+    grid-column: 1 / -1;
+    --h: min(var(--max-h), calc(100cqw / var(--a)));
+  }
+  /* The image is scaled and shifted so only its visible area fills the box. */
+  .lineage__logo :global(.lineage__img) {
+    position: absolute;
+    height: calc(var(--h) / var(--vh));
+    width: auto;
+    max-width: none;
+    top: calc(-1 * var(--h) * var(--vy) / var(--vh));
+    left: calc(-1 * var(--h) / var(--vh) * var(--r) * var(--vx));
+    /* White logo backgrounds take on the page colour, so no box is needed. */
+    mix-blend-mode: multiply;
+  }
+  .lineage__logo :global(.lineage__img--dark) {
+    display: none;
+  }
+  /* Dark mode: swap in a .dark variant if one exists, otherwise invert logos
+     that are mostly black or sit on white (decided at build time). */
+  :global([data-theme='dark']) .lineage__logo :global(.lineage__img) {
+    mix-blend-mode: normal;
+  }
+  :global([data-theme='dark']) .lineage__logo.is-inverted :global(.lineage__img) {
+    filter: invert(1) hue-rotate(180deg);
+    /* Inverted white backgrounds become black; "screen" lets the page show through. */
+    mix-blend-mode: screen;
+  }
+  :global([data-theme='dark']) .lineage__logo :global(.lineage__img--light) {
+    display: none;
+  }
+  :global([data-theme='dark']) .lineage__logo :global(.lineage__img--dark) {
+    display: block;
+  }
+  .lineage__short {
+    display: inline-grid;
+    place-items: center;
+    min-width: 120px;
+    height: 120px;
+    padding: 0 16px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: 50%;
+  }
+
+  @media (max-width: 700px) {
+    .about__intro {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+    .about__intro :global(.about__photo) {
+      width: 160px;
+      height: 160px;
+    }
+
+    .lineage__list::before {
+      left: 8px;
+      translate: 0 0;
+    }
+    .lineage__item {
+      grid-template-columns: 18px minmax(0, 1fr);
+      column-gap: 20px;
+      row-gap: 14px;
+      align-items: start;
+      min-height: 0;
+    }
+    .lineage__dot {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      margin-top: 6px;
+    }
+    .lineage__logos {
+      grid-column: 2;
+      grid-row: 1;
+      gap: 16px;
+    }
+    .lineage__logos {
+      --max-h: 120px;
+    }
+    .lineage__text {
+      grid-column: 2;
+      grid-row: 2;
+      text-align: left;
+    }
+  }
+</style>

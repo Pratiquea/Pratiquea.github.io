@@ -1,0 +1,39 @@
+---
+// Inlines an Iconify icon as SVG at build time (zero runtime JS).
+// name: "set:icon", e.g. "mdi:github". Installed sets: mdi, academicons, lucide.
+import { getIconData, iconToSVG, iconToHTML, replaceIDs } from '@iconify/utils';
+import mdi from '@iconify-json/mdi/icons.json';
+import academicons from '@iconify-json/academicons/icons.json';
+import lucide from '@iconify-json/lucide/icons.json';
+import type { IconifyJSON } from '@iconify/types';
+
+interface Props {
+  name: string;
+  size?: number;
+  label?: string;
+  class?: string;
+}
+
+const sets: Record<string, IconifyJSON> = {
+  mdi: mdi as IconifyJSON,
+  academicons: academicons as IconifyJSON,
+  lucide: lucide as IconifyJSON,
+};
+
+const { name, size = 18, label, class: className } = Astro.props;
+const [prefix, iconName] = name.split(':');
+const set = sets[prefix];
+const data = set && getIconData(set, iconName);
+if (!data) throw new Error(`Icon "${name}" not found (installed sets: ${Object.keys(sets).join(', ')})`);
+
+const rendered = iconToSVG(data, { height: size, width: size });
+const attrs: Record<string, string> = {
+  ...rendered.attributes,
+  fill: 'currentColor',
+  ...(className ? { class: className } : {}),
+  ...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': 'true' }),
+};
+const svg = iconToHTML(replaceIDs(rendered.body), attrs);
+---
+
+<Fragment set:html={svg} />

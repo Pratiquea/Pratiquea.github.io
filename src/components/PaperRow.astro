@@ -1,0 +1,188 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { asset } from '../lib/images';
+import type { Publication } from '../lib/data';
+
+interface Props {
+  paper: Publication;
+}
+const { paper } = Astro.props;
+const { media, links } = paper;
+
+const still = asset('papers', media.image);
+const poster = still && media.video ? await getImage({ src: still, width: 640, format: 'webp' }) : undefined;
+const hasMedia = Boolean(media.video || still);
+const titleHref = links.website || links.paper;
+
+// Flagship venues (site.highlightVenues) get an accent tag, e.g. "ICRA 2025".
+const flagship = site.highlightVenues.find((abbr) => new RegExp(`\\b${abbr}\\b`).test(paper.venue));
+const year = paper.venue.match(/\b(?:19|20)\d{2}\b/)?.[0];
+
+const isMe = (name: string) => site.authorNames.includes(name.replace(/[*†]+$/, '').trim());
+
+const buttons = [
+  { key: 'paper', label: 'Paper', icon: 'lucide:file-text', href: links.paper },
+  { key: 'code', label: 'Code', icon: 'mdi:github', href: links.code },
+  { key: 'website', label: 'Website', icon: 'lucide:globe', href: links.website },
+  { key: 'video', label: 'Video', icon: 'lucide:play', href: links.video },
+].filter((b) => b.href);
+---
+
+<article class:list={['paper', { 'paper--no-media': !hasMedia }]} data-reveal="fade">
+  {
+    hasMedia && (
+      <div class="paper__media">
+        {media.video ? (
+          <video
+            class="paper__video"
+            data-lazy-video
+            data-src={media.video}
+            poster={poster?.src}
+            muted
+            loop
+            playsinline
+            preload="none"
+            aria-label={`Clip: ${paper.title}`}
+          />
+        ) : (
+          still && (
+            <Image src={still} alt="" width={560} widths={[280, 560]} sizes="(max-width: 700px) 100vw, 280px" />
+          )
+        )}
+      </div>
+    )
+  }
+
+  <div class="paper__body">
+    <h3 class="paper__title">
+      {
+        titleHref ? (
+          <a href={titleHref} target="_blank" rel="noopener noreferrer">
+            {paper.title}
+          </a>
+        ) : (
+          paper.title
+        )
+      }
+    </h3>
+    <p class="paper__authors">
+      {
+        paper.authors.map((name, i) => (
+          <>
+            {isMe(name) ? <strong>{name}</strong> : name}
+            {i < paper.authors.length - 1 && ', '}
+          </>
+        ))
+      }
+    </p>
+    <p class="paper__venue">
+      {flagship && <span class="paper__flagship">{[flagship, year].filter(Boolean).join(' ')}</span>}
+      <span class:list={{ 'paper__venue--flagship': flagship }}>{paper.venue}</span>
+      {paper.award && <span class="award">{paper.award}</span>}
+    </p>
+
+    {
+      (buttons.length > 0 || links.bibtex) && (
+        <div class="badges paper__links">
+          {buttons.map((b) => (
+            <a class="badge" href={b.href} target="_blank" rel="noopener noreferrer">
+              <Icon name={b.icon} size={14} />
+              {b.label}
+            </a>
+          ))}
+          {links.bibtex && (
+            <button class="badge" type="button" data-bibtex={links.bibtex.trim()}>
+              <Icon name="lucide:braces" size={14} />
+              <span data-bibtex-label>BibTeX</span>
+            </button>
+          )}
+        </div>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .paper {
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: clamp(20px, 3.5vw, 36px);
+    align-items: center;
+  }
+  .paper--no-media {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .paper__media {
+    aspect-ratio: 16 / 10;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--thumb);
+  }
+  .paper__media :global(img),
+  .paper__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .paper__body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .paper__title {
+    font-size: 1.12rem;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .paper__title a {
+    text-decoration: none;
+  }
+  .paper__title a:hover {
+    color: var(--accent);
+  }
+  .paper__authors {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+  .paper__authors strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+  .paper__venue {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 10px;
+    font-size: 0.9rem;
+    font-style: italic;
+  }
+  .paper__venue .award {
+    font-style: normal;
+  }
+  .paper__flagship {
+    display: inline-block;
+    padding: 2px 9px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    color: var(--accent-contrast);
+    background: var(--accent);
+    border-radius: 4px;
+  }
+  .paper__venue--flagship {
+    font-weight: 600;
+  }
+  .paper__links {
+    margin-top: 6px;
+  }
+
+  @media (max-width: 700px) {
+    .paper {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 14px;
+    }
+  }
+</style>

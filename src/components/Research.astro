@@ -1,0 +1,65 @@
+---
+import PaperRow from './PaperRow.astro';
+import { site } from '../data/site';
+import { publications } from '../lib/data';
+
+const scholar = site.socials.find((s) => s.label === 'Google Scholar')?.url;
+const show = publications.length > 0 || import.meta.env.DEV;
+---
+
+{
+  show && (
+    <section id="research" class="section research">
+      <div class="container">
+        <span class="eyebrow">Research</span>
+        <h2 class="section-title" data-reveal="chars">
+          Publications
+        </h2>
+        {scholar && (
+          <p class="research__note">
+            <a href={scholar} target="_blank" rel="noopener noreferrer">
+              Full list on Google Scholar
+            </a>
+          </p>
+        )}
+
+        {publications.length > 0 ? (
+          <div class="research__list">
+            {publications.map((paper) => (
+              <PaperRow paper={paper} />
+            ))}
+          </div>
+        ) : (
+          <p class="research__empty">
+            (Dev only) Add your papers in <code>src/data/publications.yaml</code> — this section is hidden in the
+            production build until you do.
+          </p>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .research__note {
+    margin-top: calc(-1 * clamp(16px, 3vw, 32px));
+    margin-bottom: clamp(28px, 5vw, 48px);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .research__note a {
+    color: var(--accent);
+    text-underline-offset: 3px;
+  }
+  .research__list {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(36px, 5vw, 48px);
+  }
+  .research__empty {
+    padding: 24px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    color: var(--muted);
+  }
+</style>

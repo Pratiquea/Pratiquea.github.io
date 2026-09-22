@@ -1,0 +1,44 @@
+# Educational & professional lineage, newest first.
+#
+# Fields:
+#   role:     degree or position (required)
+#   place:    lab · institution (required)
+#   advisor:  optional line under the place
+#   dates:    e.g. "Aug 2021 – Present" (optional)
+#   short:    short name shown when no logo is set, e.g. "UMD"
+#   logos:    up to two image files in src/assets/logos/ (png/svg/jpg). For dark
+#             mode see scripts/make-dark-logo.mjs.
+#   url:      optional link for the institution/lab
+#   focus:    one line on what you worked on there (shown last, in italics)
+
+- role: Ph.D. Candidate, Robotics
+  place: Robotic Workers Lab · University of Nevada, Reno
+  advisor: "Advisor: Prof. Christos Papachristos"
+  dates: "Aug 2020 - Present" 
+  short: UNR
+  logos: [unr-black.png, rwl.png]
+  focus: "Developing resilient autonomous robotic systems capable of overcoming mobility and manipulation constraints" # 
+
+- role: Masters in Robotics
+  place: Perception & Robotics Group · University of Maryland, College Park
+  advisor: "Advisor: Prof. Yiannis Aloimonos"
+  dates: "Aug 2018 - May 2020" 
+  short: UMD
+  logos: [umd-black.png, prg-black.png]
+  focus: "Autonomous vision-based navigation for nano quadrotors" 
+
+- role: Research Associate
+  place: IIIT-Delhi
+  advisor: "Advisor: Prof. P.B. Sujit & Prof. Sanjit Kaul " #— self-driving cars in Indian urban traffic
+  dates: "Jan 2017 - July 2018" 
+  short: IIIT-D
+  logos: [iiitd.png]
+  focus: "Self-driving cars in Indian urban traffic" 
+
+- role: B.Tech, Electrical Engineering
+  place: Bharati Vidyapeeth's College of Engineering, GGSIPU
+  advisor: "Advisor: Prof. Gargi Mishra" #Legged-robot locomotion with Asst.
+  dates: "Aug 2012 - May 2016" 
+  short: BVP
+  logos: [bvp.png]
+  focus: "Hexapod locomotion using inverse kinematics" 

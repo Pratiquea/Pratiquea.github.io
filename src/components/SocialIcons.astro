@@ -1,0 +1,65 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+
+interface Props {
+  size?: 'lg' | 'sm';
+  class?: string;
+}
+
+const { size = 'lg', class: className } = Astro.props;
+const links = site.socials.filter((s) => s.url);
+---
+
+<ul class:list={['socials', `socials--${size}`, className]}>
+  {
+    links.map((s) => (
+      <li>
+        <a
+          href={s.url}
+          aria-label={s.label}
+          title={s.label}
+          {...(s.url.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+        >
+          <Icon name={s.icon} size={size === 'lg' ? 20 : 16} />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .socials {
+    display: flex;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .socials a {
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: inherit;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .socials--lg a {
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+  }
+  .socials--lg a:hover {
+    background: var(--hero-text);
+    color: #1f2328;
+  }
+  .socials--sm {
+    gap: 4px;
+  }
+  .socials--sm a {
+    width: 34px;
+    height: 34px;
+  }
+  .socials--sm a:hover {
+    color: var(--accent);
+  }
+</style>

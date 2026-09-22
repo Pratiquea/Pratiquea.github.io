@@ -7,8 +7,10 @@
 export const site = {
   name: 'Prateek Arora',
 
-  // Shown under your name in the hero.
-  title: 'PhD Candidate · Computer Science and Engineering · University of Nevada, Reno',
+  // Shown under your name in the hero, one line each.
+  titleLines: ['PhD Candidate, CSE', 'University of Nevada, Reno'],
+  // Used for the page <title> and meta tags.
+  title: 'PhD Candidate, CSE · University of Nevada, Reno',
   tagline: 'Developing autonomous systems capable of overcoming mobility and manipulation constraints',
 
   // Used for search engines and link previews (Slack, X, LinkedIn...).

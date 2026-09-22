@@ -12,7 +12,7 @@ const { sections } = Astro.props;
 
 <header class="nav" data-nav>
   <div class="nav__inner container">
-    <a class="nav__brand" href="#top">{site.name}</a>
+    <a class="nav__brand" href="#top">Home</a>
 
     <nav class="nav__menu" id="nav-menu" aria-label="Sections" data-nav-menu>
       <ul class="nav__links">
@@ -74,6 +74,13 @@ const { sections } = Astro.props;
     backdrop-filter: blur(12px);
   }
 
+  /* Extra contrast against the video while the nav is still transparent. */
+  .nav:not(.is-solid):not(.is-open) .nav__brand,
+  .nav:not(.is-solid):not(.is-open) .nav__links a,
+  .nav:not(.is-solid):not(.is-open) .nav__tools {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  }
+
   .nav__inner {
     height: 100%;
     display: flex;
@@ -101,7 +108,13 @@ const { sections } = Astro.props;
     position: relative;
     text-decoration: none;
     opacity: 0.85;
-    transition: opacity 0.2s ease;
+    font-weight: 500;
+    transition: opacity 0.2s ease, font-size 0.3s ease, font-weight 0.3s ease;
+  }
+  /* Bigger, bolder while the nav floats over the hero video. */
+  .nav:not(.is-solid):not(.is-open) .nav__links a {
+    font-size: 1.05rem;
+    font-weight: 500;
   }
   .nav__links a:hover,
   .nav__links a[aria-current='true'] {

@@ -30,12 +30,15 @@ const [first] = site.heroVideos;
     <div class="hero__tint"></div>
   </div>
 
-  <div class="hero__content container" data-hero-content>
+  <div class="hero__content" data-hero-content>
     <h1 class="hero__name">{site.name}</h1>
-    <p class="hero__title">{site.title}</p>
+    <div class="hero__title">
+      {site.titleLines.map((line) => <p>{line}</p>)}
+    </div>
     {site.tagline && <p class="hero__tagline">{site.tagline}</p>}
-    <SocialIcons size="lg" class="hero__socials" />
   </div>
+
+  <SocialIcons size="lg" class="hero__socials" />
 
   <a class="hero__cue" href="#about" aria-label="Scroll to About">
     <Icon name="lucide:chevron-down" size={26} />
@@ -65,22 +68,29 @@ const [first] = site.heroVideos;
     height: 100%;
     object-fit: cover;
   }
-  /* Tint for legibility, plus a fade into the page background at the bottom. */
+  /* Tint for legibility: dark scrim behind the nav, fade into the page background at the bottom. */
   .hero__tint {
     position: absolute;
     inset: 0;
     background:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.55) 0%, transparent 18%),
       linear-gradient(to bottom, transparent 55%, var(--hero-fade) 100%),
       var(--hero-tint);
   }
 
   .hero__content {
-    position: relative;
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    /* transform: translateY(-50%); */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    /* align-items: center; */
     gap: 12px;
-    text-align: center;
+    text-align: left;
+    padding-left: clamp(12px, 4vw, 32px);
+    max-width: min(90vw, 620px);
   }
   .hero__name {
     font-size: clamp(2.6rem, 8vw, 4.8rem);
@@ -89,10 +99,16 @@ const [first] = site.heroVideos;
     animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
   .hero__title {
-    font-size: clamp(0.95rem, 2.2vw, 1.15rem);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: clamp(1.1rem, 2.6vw, 1.5rem);
     font-weight: 500;
     color: var(--hero-accent);
     animation: rise 0.9s 0.12s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .hero__title p {
+    margin: 0;
   }
   .hero__tagline {
     max-width: 36ch;
@@ -100,8 +116,14 @@ const [first] = site.heroVideos;
     opacity: 0.85;
     animation: rise 0.9s 0.2s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
-  .hero__content :global(.hero__socials) {
-    margin-top: 14px;
+
+  /* Social icons: vertical column, docked to the right edge of the hero. */
+  .hero :global(.hero__socials) {
+    position: absolute;
+    top: 50%;
+    right: var(--gutter);
+    flex-direction: column;
+    transform: translateY(-50%);
     animation: rise 0.9s 0.3s cubic-bezier(0.2, 0.7, 0.2, 1) both;
   }
 
